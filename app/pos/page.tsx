@@ -1141,8 +1141,8 @@ export default function PointOfSalePage() {
       const barcodeScannedPages = scannerPages.map((page, index) => ({
         page_number: index + 1,
         store_name: page.storeName || user?.pos_shop_name || '',
-        items_count: page.scannedItems.length,
-        items: page.scannedItems.map(item => ({
+        total_count: page.scannedItems.length,
+        products: page.scannedItems.map(item => ({
           barcode: item.barcode,
           product: item.product,
           price: item.price,
