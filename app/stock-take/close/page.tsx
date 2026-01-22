@@ -254,9 +254,11 @@ function CloseStockTakePage() {
 
       const uppercasePromoterName = promoterName.trim().toUpperCase();
 
-      // Payload for close stock by store - includes store_name and entries
+      // Payload for close stock - includes store_name, close_date, and entries
+      const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
       const payload = {
         store_name: storeName,
+        close_date: today,
         entries: scannedItems.map(item => ({
           product_name: item.product,
           promoter_name: uppercasePromoterName,
@@ -264,9 +266,9 @@ function CloseStockTakePage() {
         })),
       };
 
-      console.log('Sending close stock by store payload:', payload);
+      console.log('Sending close stock payload:', payload);
 
-      const response = await fetch(`${BACKEND_URL}/api/stock-takes/close-stock-by-store`, {
+      const response = await fetch(`${BACKEND_URL}/api/stock-takes/close-stock`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
